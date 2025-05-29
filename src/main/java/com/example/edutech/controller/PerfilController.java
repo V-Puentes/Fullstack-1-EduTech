@@ -1,15 +1,10 @@
-public class EdutechController {
-    
-}
-/*ejemplo LibroController
-
-package com.example.bibliotecaduoc.controller;
+package com.example.edutech.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.example.bibliotecaduoc.model.Libro;
-import com.example.bibliotecaduoc.service.LibroService;
+import com.example.edutech.model.Perfil;
+import com.example.edutech.service.PerfilService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,39 +14,36 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-
-
-
 @RestController
-@RequestMapping("/api/v1/libros")
-public class LibroController {
+@RequestMapping("/api/v1/perfiles")
+    
+public class PerfilController {
     
     @Autowired
-    private LibroService libroService;
+    private PerfilService perfilService;
 
     @GetMapping
-    public List<Libro> listarLibros() {
-        return libroService.getLibros();
+    public List<Perfil> listarPerfiles() {
+        return perfilService.obtenerPerfiles();
     }
 
     @PostMapping
-    public Libro agregarLibro(@RequestBody Libro libro) {
-        return libroService.saveLibro(libro);
+    public Perfil agregarPerfil(@RequestBody Perfil perfil) {
+        return perfilService.guardar(perfil);
     }
     
     @GetMapping("{id}")
-    public Libro buscarLibro(@PathVariable int id) {
-        return libroService.getLibroId(id);
+    public Perfil buscarPerfil(@PathVariable int id) {
+        return perfilService.buscarPorId(id);
     }
 
     @PutMapping("{id}")
-    public Libro actualizarLibro(@PathVariable int id, @RequestBody Libro libro) {
-        return libroService.updateLibro(libro);
+    public Perfil actualizarPerfil(@PathVariable int id, @RequestBody Perfil perfil) {
+        return perfilService.actualizar(perfil);
     }
 
     @DeleteMapping("{id}")
-    public String eliminarLibro(@PathVariable int id){
-        return libroService.deleteLibro(id);
+    public void eliminarPerfil(@PathVariable int id){
+        perfilService.eliminar(id);
     }
 }
- */
