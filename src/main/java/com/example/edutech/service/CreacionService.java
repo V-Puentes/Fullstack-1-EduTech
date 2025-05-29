@@ -1,37 +1,36 @@
-public class EdutechService {
-    
-}
-/*ejemplo pacienteService package com.hospital_vm.cl.hospital_vm.service;
+package com.example.edutech.service;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.hospital_vm.cl.hospital_vm.model.Paciente;
-import com.hospital_vm.cl.hospital_vm.repository.PacienteRepository;
-import jakarta.transaction.Transactional;
+import com.example.edutech.model.Creacion;
+import com.example.edutech.repository.CreacionRepository;
 
 @Service
-@Transactional
-public class PacienteService {
-    
+public class CreacionService {
+
     @Autowired
-    private PacienteRepository pacienteRepository;
+    private CreacionRepository creacionRepository;
 
-    public List<Paciente> findAll(){
-        return pacienteRepository.findAll();
-    }
-
-    public Paciente findById(long id){
-        return pacienteRepository.findById(id).get();
+    public List<Creacion> obtenerCreaciones() {
+        return creacionRepository.obtenerCreaciones();
     }
 
-    public Paciente save(Paciente paciente){
-        return pacienteRepository.save(paciente);
+    public Creacion buscarPorId(int id) {
+        return creacionRepository.buscarPorId(id);
     }
-    
-    public void delete(Long id){
-        pacienteRepository.deleteById(id);
+
+    public Creacion guardar(Creacion creacion) {
+        return creacionRepository.guardar(creacion);
     }
+
+    public Creacion actualizar(Creacion creacion) {
+        return creacionRepository.actualizar(creacion);
+    }
+
+    public void eliminar(int id) {
+        creacionRepository.eliminar(id);
+    }
+
 
 }
-*/

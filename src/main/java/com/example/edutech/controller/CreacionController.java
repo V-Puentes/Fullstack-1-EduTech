@@ -1,15 +1,10 @@
-public class EdutechController {
-    
-}
-/*ejemplo LibroController
-
-package com.example.bibliotecaduoc.controller;
+package com.example.edutech.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.example.bibliotecaduoc.model.Libro;
-import com.example.bibliotecaduoc.service.LibroService;
+import com.example.edutech.model.Creacion;
+import com.example.edutech.service.CreacionService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,39 +14,36 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-
-
-
 @RestController
-@RequestMapping("/api/v1/libros")
-public class LibroController {
+@RequestMapping("/api/v1/creaciones")
+    
+public class CreacionController {
     
     @Autowired
-    private LibroService libroService;
+    private CreacionService creacionService;
 
     @GetMapping
-    public List<Libro> listarLibros() {
-        return libroService.getLibros();
+    public List<Creacion> listarCreaciones() {
+        return creacionService.obtenerCreaciones();
     }
 
     @PostMapping
-    public Libro agregarLibro(@RequestBody Libro libro) {
-        return libroService.saveLibro(libro);
+    public Creacion agregarCreacion(@RequestBody Creacion creacion) {
+        return creacionService.guardar(creacion);
     }
     
     @GetMapping("{id}")
-    public Libro buscarLibro(@PathVariable int id) {
-        return libroService.getLibroId(id);
+    public Creacion buscarCreacion(@PathVariable int id) {
+        return creacionService.buscarPorId(id);
     }
 
     @PutMapping("{id}")
-    public Libro actualizarLibro(@PathVariable int id, @RequestBody Libro libro) {
-        return libroService.updateLibro(libro);
+    public Creacion actualizarCreacion(@PathVariable int id, @RequestBody Creacion creacion) {
+        return creacionService.actualizar(creacion);
     }
 
     @DeleteMapping("{id}")
-    public String eliminarLibro(@PathVariable int id){
-        return libroService.deleteLibro(id);
+    public void eliminarCreacion(@PathVariable int id){
+        creacionService.eliminar(id);
     }
 }
- */

@@ -1,37 +1,38 @@
-public class EdutechService {
-    
-}
-/*ejemplo pacienteService package com.hospital_vm.cl.hospital_vm.service;
+package com.example.edutech.service;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.hospital_vm.cl.hospital_vm.model.Paciente;
-import com.hospital_vm.cl.hospital_vm.repository.PacienteRepository;
-import jakarta.transaction.Transactional;
+import com.example.edutech.model.Perfil;
+import com.example.edutech.repository.PerfilRepository;
 
 @Service
-@Transactional
-public class PacienteService {
-    
+public class PerfilService {
+
     @Autowired
-    private PacienteRepository pacienteRepository;
+    private PerfilRepository perfilRepository;
 
-    public List<Paciente> findAll(){
-        return pacienteRepository.findAll();
+    public List<Perfil> obtenerPerfiles() {
+        return perfilRepository.obtenerPerfiles();
     }
 
-    public Paciente findById(long id){
-        return pacienteRepository.findById(id).get();
+    public Perfil buscarPorId(int id) {
+        return perfilRepository.buscarPorId(id);
     }
 
-    public Paciente save(Paciente paciente){
-        return pacienteRepository.save(paciente);
-    }
-    
-    public void delete(Long id){
-        pacienteRepository.deleteById(id);
+    public Perfil guardar(Perfil perfil) {
+        return perfilRepository.guardar(perfil);
     }
 
+    public Perfil actualizar(Perfil perfil) {
+        return perfilRepository.actualizar(perfil);
+    }
+
+    public void eliminar(int id) {
+        perfilRepository.eliminar(id);
+    }
+
+    public Perfil buscarPorRut(String rut) {
+        return perfilRepository.buscarPorRut(rut);
+    }
 }
-*/
