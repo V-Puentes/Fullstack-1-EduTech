@@ -147,5 +147,6 @@ public ResponseEntity<EntityModel<Perfil>> obtenerPerfilPorId(
             @RequestBody Perfil perfil) {
         return perfilService.guardar(perfil);
     }
+    
 }
     
