@@ -1,7 +1,12 @@
 package com.example.edutech.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.example.edutech.assembler.UsuarioAssembler;
 import com.example.edutech.model.Usuario;
 import com.example.edutech.service.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -11,8 +16,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-
 import java.util.List;
+import java.util.stream.Collectors;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping("/api/v1/usuarios")
@@ -24,6 +31,9 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
+    @Autowired
+    private UsuarioAssembler usuarioAssembler;
+
     @GetMapping
     @Operation(
         summary = "Se listan todos los usuarios",
@@ -32,8 +42,15 @@ public class UsuarioController {
         responseCode = "200",
         description = "Lista de usuarios obtenida exitosamente",
         content = @Content(schema = @Schema(implementation = Usuario.class)))
-    public List<Usuario> listarUsuarios() {
-        return usuarioService.obtenerUsuarios();
+    public ResponseEntity<CollectionModel<EntityModel<Usuario>>> listarUsuarios() {
+        List<EntityModel<Usuario>> usuarios = usuarioService.obtenerUsuarios().stream()
+            .map(usuarioAssembler::toModel)
+            .collect(Collectors.toList());
+        
+        return ResponseEntity.ok(
+            CollectionModel.of(usuarios,
+                linkTo(methodOn(UsuarioController.class).listarUsuarios()).withSelfRel())
+        );
     }
 
     @PostMapping
@@ -71,13 +88,17 @@ public class UsuarioController {
             responseCode = "404",
             description = "Usuario no encontrado")
     })
-    public Usuario buscarUsuario(
+    public ResponseEntity<EntityModel<Usuario>> buscarUsuario(
             @Parameter(
                 description = "ID del usuario a buscar",
                 example = "1", required = true)
             @PathVariable int id) {
-        return usuarioService.buscarPorId(id);
-    }
+                Usuario usuario = usuarioService.buscarPorId(id);
+                if (usuario != null) {
+                    return ResponseEntity.ok(usuarioAssembler.toModel(usuario));
+                }
+                return ResponseEntity.notFound().build();
+            }
 
     @PutMapping("/{id}")
     @Operation(

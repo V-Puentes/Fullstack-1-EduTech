@@ -29,7 +29,7 @@ public class Usuario {
 
     @Column(nullable=false)
     @Schema(
-        description = "Nombre(s) del usuario", 
+        description = "Nombre(s) del usuario",
         example = "Pedro Pablo",
         required = true
     )
@@ -37,7 +37,7 @@ public class Usuario {
 
     @Column(nullable = false)
     @Schema(
-        description = "Apellido(s) del usuario", 
+        description = "Apellido(s) del usuario",
         example = "Perez Paredes",
         required = true
     )
@@ -45,7 +45,7 @@ public class Usuario {
 
     @Column(nullable = true)
     @Schema(
-        description = "Fecha de nacimiento", 
+        description = "Fecha de nacimiento",
         example = "1990-05-15",
         type = "string",
         format = "date"
